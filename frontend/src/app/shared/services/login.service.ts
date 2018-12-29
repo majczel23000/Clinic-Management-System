@@ -11,7 +11,10 @@ export class LoginService {
   // Logowanie użytkownika
   loginUser(username: string, password: string) {
     console.log('logowanie...', username, password);
-    localStorage.setItem('user', username);
+    if (username === 'admin' && password === 'admin') {
+      this.router.navigate(['/dashboard']);
+      localStorage.setItem('user', username);
+    }
   }
 
   // Rejestracja użytkownika
@@ -28,5 +31,5 @@ export class LoginService {
   isUserLogged(){
     return localStorage.getItem('user');
   }
-  
+
 }
