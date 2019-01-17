@@ -11,6 +11,15 @@
       <li *ngIf="!loginService.isUserLogged()" class="nav-item">
         <a class="nav-link" [routerLink]="['/register']">Register</a>
       </li>
+      <li *ngIf="loginService.isUserLogged()" class="nav-item">
+        <a class="nav-link" [routerLink]="['/dashboard/profile']">Profile</a>
+      </li>
+      <li *ngIf="loginService.isUserLogged()" class="nav-item">
+        <a class="nav-link" [routerLink]="['/dashboard/doctors']">Doctors</a>
+      </li>
+      <li *ngIf="loginService.isUserLogged()" class="nav-item">
+        <a class="nav-link" [routerLink]="['/dashboard/visits']">Visits</a>
+      </li>
       <li (click)="logoutUser()" *ngIf="loginService.isUserLogged()" class="nav-item">
         <a class="nav-link">Logout</a>
       </li>

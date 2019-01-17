@@ -1,0 +1,73 @@
+
+<div class="row pt-5">
+  <div class="col-md-8 mx-auto">
+      <button class="btn btn-info btn-cursor" routerLink="/dashboard/doctors">Go back to doctors</button>
+    <div *ngIf="!visibility">
+      <h2 class="display-5 text-center pb-4">Details of doctor: {{doctor?.firstName}}</h2>
+      <ul class="list-group detailsColor">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-sm-4"><b>First Name:</b></div>
+            <div class="col-sm-8">{{doctor?.firstName}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-sm-4"><b>Last Name</b></div>
+            <div class="col-sm-8">{{doctor?.firstName}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-sm-4"><b>Email:</b></div>
+            <div class="col-sm-8">{{doctor?.email}}</div>
+          </div>
+        </li>
+      </ul>
+      <button type="button" class="btn btn-primary btn-sm mt-3 float-right px-5 cursorPointer" (click)="showEditForm()">Edit</button>
+      <div class="clear"></div>
+    </div>
+    <form *ngIf="visibility" id="editForm" class="detailsColor" #doctorData="ngForm" (ngSubmit)="editDoctorData(doctorData.value)">
+      <h2 class="display-5 text-center pb-4">Edit details of user: {{doctor?.firstName}}</h2>
+      <h6 class="text-center">Changes will be saved after click save button.</h6>
+      <br/>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">First Name: </label>
+        <div class="col-sm-10">
+          <input type="text" name="firstName" class="form-control" id="inputFirstname" [(ngModel)]="doctor.firstName" ngModel >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Last Name: </label>
+        <div class="col-sm-10">
+          <input type="text" name="lastName" class="form-control" id="inputLastname" [(ngModel)]="doctor.lastName" ngModel>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail" class="col-sm-2 col-form-label">Email: </label>
+        <div class="col-sm-10">
+          <input type="email" name="email" class="form-control" id="inputEmail" [(ngModel)]="doctor.email" ngModel>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Password: </label>
+        <div class="col-sm-10">
+          <input type="password" name="password" class="form-control" id="inputPassword"  [ngClass]="{ 'is-invalid': passwordLength}" ngModel>
+          <span class="text-danger" *ngIf="passwordLength">Password must be at least 5 characters</span>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <label for="confirmPassword" class="col-sm-2 col-form-label">Confirm password: </label>
+        <div class="col-sm-10">
+          <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" ngModel>
+          <div  style="color: red" *ngIf="flag">{{error}}</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success float-right px-5 cursorPointer">Save</button>
+      <div class="clear"></div>
+    </form>
+</div>
+</div>
+
+

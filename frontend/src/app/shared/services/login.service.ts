@@ -25,6 +25,7 @@ export class LoginService {
   // Wyloguj użytkownika
   logoutUser(){
     localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 
   // Sprawdzam, czy jesteśmy zalogowani

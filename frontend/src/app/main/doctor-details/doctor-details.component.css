@@ -1,0 +1,12 @@
+.btn-cursor:hover{
+    cursor: pointer !important;
+  }
+  .clear{
+    clear: both;
+  }
+  .display-none{
+    display: none;
+  }
+  .is-invalid{
+    border: 2px solid #ff6780 !important;
+  }
