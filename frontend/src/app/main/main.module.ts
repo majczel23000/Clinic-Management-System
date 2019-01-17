@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpModule} from '@angular/http';
 import { MainRoutingModule } from './main-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
@@ -13,7 +14,8 @@ import { DoctorDetailsComponent } from './doctor-details/doctor-details.componen
     CommonModule,
     MainRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   declarations: [ProfileComponent, DoctorsComponent, VisitsComponent, DoctorDetailsComponent]
 })
