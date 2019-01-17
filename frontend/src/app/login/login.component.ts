@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../shared/services/login.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,17 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loginService.loginUser(this.loginForm.value.username, this.loginForm.value.password);
-  }
+    this.loginService.login(this.loginForm.controls.username.value,this.loginForm.controls.password.value).subscribe(
+      data => {
+        localStorage.setItem('access-token', JSON.stringify(data));
+        console.log(localStorage.getItem('access-token'));
+        this.router.navigate(['dashboard']);
+      }, 
+      error => {
+        alert(error.error.error_description);
+      }
+    );
+
+}
 
 }

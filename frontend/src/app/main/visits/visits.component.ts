@@ -12,4 +12,6 @@ export class VisitsComponent implements OnInit {
   ngOnInit() {
   }
 
+  
+
 }

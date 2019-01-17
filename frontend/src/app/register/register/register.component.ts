@@ -53,7 +53,14 @@ export class RegisterComponent implements OnInit {
       lastName: this.registerForm.value.lastName
     }
 
-    this.loginService.registerUser(userData);
+    this.loginService.registerUser(userData).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
     
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,31 +11,30 @@ export class LoginService {
   constructor(private router: Router,
               private http: HttpClient) { }
 
-  // Logowanie użytkownika
-  loginUser(username: string, password: string) {
-    console.log('logowanie...', username, password);
-    if (username === 'admin' && password === 'admin') {
-      this.router.navigate(['/dashboard']);
-      localStorage.setItem('user', username);
-    }
 
-    // return this.http.post<any>('http://localhost:3000/login', { username: username, password: password }).subscribe(
-    //   res => {
-    //     // udalo sie zalogowac
-    //     this.router.navigate(['/dashboard']);
-    //     localStorage.setItem('user', res);
-    //   },
-    //   err => {
-    //     // nie udalo sie
-    //     alert(err);
-    //   }
-    // )
+  login(username: string, password: string) {
+    this.clearToken();
+    const body = `grant_type=password&username=${username}&password=${password}`;
+    let headers = new HttpHeaders({
+      "Content-Type":"application/x-www-form-urlencoded",
+      Authorization: "Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0"
+    });
+    let options = {headers:headers};
+    return this.http.post<string>('oauth/token', body, options);
+  }
+
+  clearToken(){
+    localStorage.clear();
+  }
+
+  getToken(){
+    return localStorage.getItem('token');
   }
 
   // Rejestracja użytkownika
   registerUser(userData: {}){
     console.log('registering...', userData);
-    // return this.http.post('http://localhost:3000/users/register', userData);
+    return this.http.post('https://localhost:8081/register', userData);
   }
 
   // Wyloguj użytkownika
@@ -45,7 +45,7 @@ export class LoginService {
 
   // Sprawdzam, czy jesteśmy zalogowani
   isUserLogged(){
-    return localStorage.getItem('user');
+    return localStorage.getItem('access-token');
   }
 
 }
