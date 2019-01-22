@@ -14,13 +14,17 @@ export class LoginService {
 
   login(username: string, password: string) {
     this.clearToken();
-    const body = `grant_type=password&username=${username}&password=${password}`;
-    let headers = new HttpHeaders({
-      "Content-Type":"application/x-www-form-urlencoded",
-      Authorization: "Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0"
-    });
-    let options = {headers:headers};
-    return this.http.post<string>('oauth/token', body, options);
+    // const body = `grant_type=password&username=${username}&password=${password}`;
+    // let headers = new HttpHeaders({
+    //   "Content-Type":"application/x-www-form-urlencoded",
+    //   Authorization: "Basic bXktdHJ1c3RlZC1jbGllbnQ6c2VjcmV0"
+    // });
+    // let options = {headers:headers};
+    // return this.http.post<string>('oauth/token', body, options);
+    if(username == 'admin' && password == 'admin'){
+      localStorage.setItem('access-token', '123');
+      this.router.navigate(['dashboard']);
+    }
   }
 
   clearToken(){
@@ -32,14 +36,13 @@ export class LoginService {
   }
 
   // Rejestracja użytkownika
-  registerUser(userData: {}){
-    console.log('registering...', userData);
-    return this.http.post('https://localhost:8081/register', userData);
+  registerUser(userData){
+    return this.http.post<any>('register', userData);
   }
 
   // Wyloguj użytkownika
   logoutUser(){
-    localStorage.removeItem('user');
+    localStorage.removeItem('access-token');
     this.router.navigate(['/login']);
   }
 

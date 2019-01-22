@@ -40,16 +40,18 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loginService.login(this.loginForm.controls.username.value,this.loginForm.controls.password.value).subscribe(
-      data => {
-        localStorage.setItem('access-token', JSON.stringify(data));
-        console.log(localStorage.getItem('access-token'));
-        this.router.navigate(['dashboard']);
-      }, 
-      error => {
-        alert(error.error.error_description);
-      }
-    );
+    this.loginService.login(this.loginForm.controls.username.value,this.loginForm.controls.password.value)
+    // .subscribe(
+    //   data => {
+    //     console.log(data);
+    //     localStorage.setItem('access-token', JSON.stringify(data));
+    //     console.log(localStorage.getItem('access-token'));
+    //     this.router.navigate(['dashboard']);
+    //   }, 
+    //   error => {
+    //     alert(error.error.error_description);
+    //   }
+    // );
 
 }
 

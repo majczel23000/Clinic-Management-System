@@ -6,4 +6,5 @@
     "changeOrigin": true,
     "pathRewrite": {"^/oauth" : "/oauth"}
   }
+
 }

@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-8 offset-2">
+    <div class="row">
+      <div class="col-md-4"><button class=" mt-4 btn btn-info" routerLink="add">Add med</button></div>
+      <div class="col-md-8"><h3 class="mt-4 text-center">| List of all meds:</h3></div>
+    </div>
+    
+    
+    <table class="table mt-5 table-hover text-center " id="medsTable">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let med of meds; let i = index ">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{med?.name}}</td>
+          <td >{{med?.description}}</td>
+        </tr>
+    
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

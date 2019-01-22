@@ -20,6 +20,9 @@
       <li *ngIf="loginService.isUserLogged()" class="nav-item">
         <a class="nav-link" [routerLink]="['/dashboard/visits']">Visits</a>
       </li>
+      <li *ngIf="loginService.isUserLogged()" class="nav-item">
+        <a class="nav-link" [routerLink]="['/dashboard/meds']">Medicaments</a>
+      </li>
       <li (click)="logoutUser()" *ngIf="loginService.isUserLogged()" class="nav-item">
         <a class="nav-link">Logout</a>
       </li>

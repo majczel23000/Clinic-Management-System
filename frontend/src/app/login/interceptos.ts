@@ -30,6 +30,9 @@ export class ConfigInterceptor implements HttpInterceptor {
       });
     } else {
       credentialsReq = req.clone({
+        setHeaders:{
+          Authorization: ''
+        }
       });
     }
      return next.handle(credentialsReq)//.pipe(

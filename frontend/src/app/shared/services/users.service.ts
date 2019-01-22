@@ -9,10 +9,22 @@ export class UsersService {
   constructor( private http: HttpClient) { }
 
   editUserDetails(userData){
-    return this.http.post<any>('http://localhost:3000/users/'+userData.id, userData)
+    return this.http.post<any>('users/'+userData.id, userData)
   }
 
   getUserDetails(id){
-    return this.http.get<any>('http://localhost:3000/users/'+id);
+    return this.http.get<any>('users/'+id);
+  }
+
+  addDoctor(doctorData){
+    return this.http.post<any>('users', {doctorData});
+  }
+
+  getAllMeds(){
+    return this.http.get<any>('meds');
+  }
+
+  addMed(medData){
+    return this.http.post<any>('meds', medData);
   }
 }

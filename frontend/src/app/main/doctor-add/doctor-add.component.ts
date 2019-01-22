@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginService } from '../../shared/services/login.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-doctor-add',
+  templateUrl: './doctor-add.component.html',
+  styleUrls: ['./doctor-add.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class DoctorAddComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private loginService: LoginService) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -58,16 +56,7 @@ export class RegisterComponent implements OnInit {
       email: this.registerForm.value.email
     }
 
-    this.loginService.registerUser(userData).subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate(['/login']);
-      },
-      err => {
-        alert('Podane dane już istnieją w systemie, proszę wprowadzić inne');
-      }
-    );
-    
+    console.log(userData);
   }
 
 }

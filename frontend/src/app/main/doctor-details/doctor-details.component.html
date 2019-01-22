@@ -27,6 +27,8 @@
       <button type="button" class="btn btn-primary btn-sm mt-3 float-right px-5 cursorPointer" (click)="showEditForm()">Edit</button>
       <div class="clear"></div>
     </div>
+
+    <!-- EDYCJA DANYCH -->
     <form *ngIf="visibility" id="editForm" class="detailsColor" #doctorData="ngForm" (ngSubmit)="editDoctorData(doctorData.value)">
       <h2 class="display-5 text-center pb-4">Edit details of user: {{doctor?.firstName}}</h2>
       <h6 class="text-center">Changes will be saved after click save button.</h6>
