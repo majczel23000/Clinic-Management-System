@@ -1,3 +1,34 @@
-<p>
-  visits works!zxczc  
-</p>
+<div class="row">
+    <div class="col-md-8 offset-2">
+      <div class="row">
+        <div class="col-md-4"><button class=" mt-4 btn btn-info" routerLink="add">Add visit</button></div>
+        <div class="col-md-8"><h3 class="mt-4 text-center">| List of all your visits:</h3></div>
+      </div>
+      
+      
+      <table class="table mt-5 table-hover text-center " id="visitTable">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let visit of visits; let i = index ">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{visit?.date}}</td>
+            <td >{{visit?.description}}</td>
+            <td class="text-center" >
+              <button class="btn btn-edit btn-sm btn-edit-bg" (click)="detailsVisit(i)"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+      
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+  
