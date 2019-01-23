@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-8 offset-2">
+      <div class="row">
+        <div class="col-md-4"><button class=" mt-4 btn btn-info" routerLink="../">Go back to visits</button></div>
+      </div>
+      <div class="row">
+        <div class="col-2"></div>
+      <div class="col-8 text-center">
+        <div class="card mt-5 bg-dark text-white">
+          <h1 class="card-header">Add Visit</h1>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">Date</div>
+                      </div>
+                      <input type="date" class="form-control" placeholder="Date" id="myDate">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">Doctor</div>
+                      </div>
+                      <select name="doctor" id="doctors" (change)="onChange($event.target.value)">
+                        <option *ngFor="let doctor of doctors; let i = index">{{i}}. {{doctor?.name}} {{doctor?.surname}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-signature"></i></div>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Description" id="description">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6">
+                    <button type="submit" (click)="onSubmit()" class="btn btn-warning btn-block">Add</button>
+                  </div>
+                  <div class="col-md-3"></div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-2"></div>
+      </div>
+    </div>
+  </div>
+  
+  
+  

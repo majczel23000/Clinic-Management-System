@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '../../shared/services/users.service';
-@Component({
-  selector: 'app-doctors',
-  templateUrl: './doctors.component.html',
-  styleUrls: ['./doctors.component.css']
-})
-export class DoctorsComponent implements OnInit {
 
-  doctors: any;
+@Component({
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
+})
+export class UsersComponent implements OnInit {
+
+  patients: any;
 
   constructor(private router: Router,
     private usersService: UsersService) { }
 
   ngOnInit() {
-    this.usersService.getDoctors().subscribe(
+    this.usersService.getPatients().subscribe(
       res => {
-        this.doctors = res;
+        this.patients = res;
       },
       err => {
         console.log(err);
@@ -25,7 +26,7 @@ export class DoctorsComponent implements OnInit {
   }
 
   detailsUser(index: number){
-    this.router.navigate(['/dashboard/doctors/details'], {queryParams: {'id': this.doctors[index].id}});
+    this.router.navigate(['/dashboard/patients/details'], {queryParams: {'id': this.patients[index].id}});
   }
 
 }

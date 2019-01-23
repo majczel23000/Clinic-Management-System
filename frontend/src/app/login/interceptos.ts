@@ -20,7 +20,7 @@ export class ConfigInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // let apiService = this.injector.get(LoginService);
-    console.log(`Bearer ${this.loginService.getToken()}`);
+    // console.log(`Bearer ${this.loginService.getToken()}`);
     let credentialsReq;
     if(localStorage.getItem('access-token')){
       credentialsReq = req.clone({
@@ -30,26 +30,8 @@ export class ConfigInterceptor implements HttpInterceptor {
       });
     } else {
       credentialsReq = req.clone({
-        setHeaders:{
-          Authorization: ''
-        }
       });
     }
-     return next.handle(credentialsReq)//.pipe(
-  //     tap(
-  //       (event: HttpEvent<any>) => {
-  //           console.log(event);
-  //       },
-  //       (err: any) => {
-  //         if(err instanceof HttpErrorResponse){
-  //           if(err.status === 401) {
-  //             console.log(err);
-  //             this.loginService.clearToken();
-  //             this.router.navigate(['/']);
-  //           }
-  //         }
-  //     }
-  //   )
-  // );
+     return next.handle(credentialsReq);
   }
 }

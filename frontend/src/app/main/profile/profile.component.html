@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 text-center mt-5">
-      <h1 class="mb-5"><i class="fas fa-user mr-3"></i>Welcome in CMS!</h1>
+      <h1 class="mb-5"><i class="fas fa-user mr-3"></i>Welcome in CMS {{user?.name}} {{user?.surname}}</h1>
       <h5 class="mb-4">User Profile</h5>
       <ul class="list-group" *ngIf="visibility">
         <li class="list-group-item list-group-item-action">
@@ -11,7 +11,7 @@
               First Name:
             </div>
             <div class="col-md-6">
-              {{user?.firstName}}
+              {{user?.name}}
             </div>
           </div>
         </li>
@@ -21,7 +21,7 @@
               Last Name:
             </div>
             <div class="col-md-6">
-                {{user?.lastName}}
+                {{user?.surname}}
             </div>
           </div>
         </li>
@@ -55,7 +55,7 @@
               First Name:
             </div>
             <div class="col-md-6">
-              <input type="text" [(ngModel)]="user.firstName" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
+              <input type="text" [(ngModel)]="user.name" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
             </div>
           </div>
         </li>
@@ -65,7 +65,7 @@
               Last Name:
             </div>
             <div class="col-md-6">
-              <input type="text" [(ngModel)]="user.lastName" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
+              <input type="text" [(ngModel)]="user.surname" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
             </div>
           </div>
         </li>

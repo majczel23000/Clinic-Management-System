@@ -1,21 +1,32 @@
 
-<div class="row pt-5">
+
+<div class="row pt-4">
   <div class="col-md-8 mx-auto">
-      <button class="btn btn-info btn-cursor" routerLink="/dashboard/doctors">Go back to doctors</button>
+      <div class="row">
+        <div class="col-md-4"><button class="btn btn-info btn-cursor" routerLink="/dashboard/doctors">Go back to doctors</button></div>
+        <div class="col-md-8"><h3 class="display-5 text-center pb-4">Details of doctor: {{doctor?.name}}</h3></div>
+      </div>
+      
     <div *ngIf="!visibility">
-      <h2 class="display-5 text-center pb-4">Details of doctor: {{doctor?.firstName}}</h2>
+      
       <ul class="list-group detailsColor col-sm-6 mx-auto">
         <li class="list-group-item">
           <div class="row">
             <div class="col-sm-6"><b>First Name:</b></div>
-            <div class="col-sm-6">{{doctor?.firstName}}</div>
+            <div class="col-sm-6">{{doctor?.name}}</div>
           </div>
         </li>
         <li class="list-group-item">
           <div class="row">
             <div class="col-sm-6"><b>Last Name</b></div>
-            <div class="col-sm-6">{{doctor?.firstName}}</div>
+            <div class="col-sm-6">{{doctor?.surname}}</div>
 
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-sm-6"><b>Username:</b></div>
+            <div class="col-sm-6">{{doctor?.username}}</div>
           </div>
         </li>
         <li class="list-group-item">
@@ -24,23 +35,36 @@
             <div class="col-sm-6">{{doctor?.email}}</div>
           </div>
         </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-sm-6"><b>PESEL:</b></div>
+            <div class="col-sm-6">{{doctor?.pesel}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-sm-6"><b>Active:</b></div>
+            <div class="col-sm-6">{{doctor?.active}}</div>
+          </div>
+        </li>
       </ul>
       <div class="col-ms-6">
           <button type="button" class="btn btn-primary btn-sm mt-3 d-block mx-auto px-5 cursorPointer" (click)="showEditForm()">Edit</button>
+          <button type="button" *ngIf="!doctor?.active" class="btn btn-primary btn-sm mt-3 d-block mx-auto px-5 cursorPointer" (click)="activateDoctor()">Activate doctor</button>
           <div class="clear"></div>
         </div>
     </div>
 
     <!-- EDYCJA DANYCH -->
     <form *ngIf="visibility" id="editForm" class="detailsColor" #doctorData="ngForm" (ngSubmit)="editDoctorData(doctorData.value)">
-      <h2 class="display-5 text-center pb-4">Edit details of user: {{doctor?.firstName}}</h2>
+      <h2 class="display-5 text-center pb-4">Edit details of user: {{doctor?.name}}</h2>
       <h6 class="text-center">Changes will be saved after click save button.</h6>
       <br/>
       <div class="form-group row">
         <div class="col-sm-3"></div>
         <label for="inputFirstname" class="col-sm-3 col-form-label">First Name: </label>
         <div class="col-sm-3">
-          <input type="text" name="firstName" id="inputFirstname" [(ngModel)]="doctor.firstName" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
+          <input type="text" name="firstName" id="inputFirstname" [(ngModel)]="doctor.name" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
         </div>
         <div class="col-sm-3"></div>
       </div>
@@ -48,7 +72,7 @@
           <div class="col-sm-3"></div>
         <label for="inputLastname" class="col-sm-3 col-form-label">Last Name: </label>
         <div class="col-sm-3">
-          <input type="text" name="lastName" id="inputLastname" [(ngModel)]="doctor.lastName" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
+          <input type="text" name="lastName" id="inputLastname" [(ngModel)]="doctor.surname" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
         </div>
         <div class="col-sm-3"></div>
       </div>

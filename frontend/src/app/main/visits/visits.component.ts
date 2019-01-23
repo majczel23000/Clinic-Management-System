@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsersService } from '../../shared/services/users.service';
+import { LoginService } from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-visits',
@@ -8,32 +10,20 @@ import { Router } from '@angular/router';
 })
 export class VisitsComponent implements OnInit {
 
-  visits: any[] = [
-    {
-      date: '2018-03-10',
-      description: 'opis 1',
-      _id: '123456789'
-    },
-    {
-      date: '2018-03-11',
-      description: 'opis 2',
-      _id: '12332524564'
-    },
-    {
-      date: '2018-03-12',
-      description: 'opis 3',
-      _id: '342524354'
-    },
-    {
-      date: '2018-04-10',
-      description: 'opis 4',
-      _id: '12345adf45'
-    }
-  ]
-
-  constructor(private router: Router) { }
+  visits: any[];
+  
+  constructor(private router: Router, private usersService : UsersService, private loginService: LoginService) { }
 
   ngOnInit() {
+    this.usersService.getVisit().subscribe(
+      res => {
+        console.log(res._embedded.appointment);
+        this.visits = res._embedded.appointment;
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   detailsVisit(index: number){

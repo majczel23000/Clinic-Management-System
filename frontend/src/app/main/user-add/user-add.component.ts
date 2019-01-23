@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginService } from '../../shared/services/login.service';
+import { UsersService } from '../../shared/services/users.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-user-add',
+  templateUrl: './user-add.component.html',
+  styleUrls: ['./user-add.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class UserAddComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private loginService: LoginService) { }
+    private router: Router, private usersService: UsersService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -62,24 +61,16 @@ export class RegisterComponent implements OnInit {
       pesel: this.registerForm.value.pesel,
       type: 'patient'
     }
-
-    this.loginService.registerUser(userData).subscribe(
+    console.log(userData);
+    this.usersService.addDoctor(userData).subscribe(
       res => {
-        console.log(res);
-        this.loginService.activateUser(res.id).subscribe(
-          res2 => {
-            this.router.navigate(['/login']);
-          },
-          err2 => {
-            console.log(err2);
-          }
-        )
+        alert('Patient added successfully');
+        this.router.navigate(['/dashboard/patients'])
       },
       err => {
-        alert('Podane dane już istnieją w systemie, proszę wprowadzić inne');
+        console.log(err);
       }
-    );
-    
+    )
   }
 
 }

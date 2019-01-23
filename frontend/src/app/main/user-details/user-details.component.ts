@@ -2,30 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UsersService } from '../../shared/services/users.service';
 
-@Component({
-  selector: 'app-doctor-details',
-  templateUrl: './doctor-details.component.html',
-  styleUrls: ['./doctor-details.component.css']
-})
-export class DoctorDetailsComponent implements OnInit {
 
-  doctorID: string;
+@Component({
+  selector: 'app-user-details',
+  templateUrl: './user-details.component.html',
+  styleUrls: ['./user-details.component.css']
+})
+export class UserDetailsComponent implements OnInit {
+
+
+  patientID: string;
   visibility = false;
   passwordLength = false;
 
-  doctor: any ;
+  patient: any ;
   constructor(private router: Router,
               private route: ActivatedRoute,
               private usersService: UsersService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.doctorID = params.id;
-      console.log(this.doctorID);
+      this.patientID = params.id;
     });
-    this.usersService.getDoctorDetails(this.doctorID).subscribe(
+    this.usersService.getPatientDetails(this.patientID).subscribe(
       res => {
-        this.doctor = res;
+        this.patient = res;
       },
       err => {
         console.log(err);
@@ -39,20 +40,18 @@ export class DoctorDetailsComponent implements OnInit {
   }
 
   // After saving changes in editing
-  editDoctorData(doctorData) {
-    if (doctorData.password === '') {
-      delete doctorData.password;
-      delete doctorData.confirmPassword;
+  editDoctorData(patientData) {
+    if (patientData.password === '') {
+      delete patientData.password;
+      delete patientData.confirmPassword;
     }
-   
-    this.doctor.id = this.doctorID;
-    console.log(this.doctor);
-    this.usersService.editDoctorDetails(this.doctor).subscribe(
+    console.log(this.patient);
+    this.patient.id=this.patientID;
+    this.usersService.editUserDetails(this.patient).subscribe(
       res => {
         alert("Data successfully modified!");
         console.log(res);
-        this.visibility = false;
-        this.doctor = res;
+        this.router.navigate(['/dashboard/patients']);
       },
       err => {
         console.log(err);
@@ -96,11 +95,11 @@ export class DoctorDetailsComponent implements OnInit {
   }
 
   activateDoctor(){
-    this.usersService.activateDoctor(this.doctorID).subscribe(
+    this.usersService.activateDoctor(this.patientID).subscribe(
       res => {
-        this.usersService.getDoctorDetails(this.doctorID).subscribe(
+        this.usersService.getPatientDetails(this.patientID).subscribe(
           res2 => {
-            this.doctor = res2;
+            this.patient = res2;
           },
           err2 => {
             console.log(err2);
@@ -112,4 +111,5 @@ export class DoctorDetailsComponent implements OnInit {
       }
     )
   }
+
 }

@@ -1,0 +1,114 @@
+
+
+<div class="row pt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="row">
+          <div class="col-md-4"><button class="btn btn-info btn-cursor" routerLink="/dashboard/patients">Go back to patients</button></div>
+          <div class="col-md-8"><h3 class="display-5 text-center pb-4">Details of patient: {{patient?.name}}</h3></div>
+        </div>
+        
+      <div *ngIf="!visibility">
+        
+        <ul class="list-group detailsColor col-sm-6 mx-auto">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-sm-6"><b>First Name:</b></div>
+              <div class="col-sm-6">{{patient?.name}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-sm-6"><b>Last Name</b></div>
+              <div class="col-sm-6">{{patient?.surname}}</div>
+  
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-sm-6"><b>Username:</b></div>
+              <div class="col-sm-6">{{patient?.username}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-sm-6"><b>Email:</b></div>
+              <div class="col-sm-6">{{patient?.email}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-sm-6"><b>PESEL:</b></div>
+              <div class="col-sm-6">{{patient?.pesel}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-sm-6"><b>Active:</b></div>
+              <div class="col-sm-6">{{patient?.active}}</div>
+            </div>
+          </li>
+        </ul>
+        <div class="col-ms-6">
+            <button type="button" class="btn btn-primary btn-sm mt-3 d-block mx-auto px-5 cursorPointer" (click)="showEditForm()">Edit</button>
+            <button type="button" *ngIf="!patient?.active" class="btn btn-primary btn-sm mt-3 d-block mx-auto px-5 cursorPointer" (click)="activateDoctor()">Activate patient</button>
+            <div class="clear"></div>
+          </div>
+      </div>
+  
+      <!-- EDYCJA DANYCH -->
+      <form *ngIf="visibility" id="editForm" class="detailsColor" #patientData="ngForm" (ngSubmit)="editDoctorData(patientData.value)">
+        <h2 class="display-5 text-center pb-4">Edit details of patient: {{patient?.firstName}}</h2>
+        <h6 class="text-center">Changes will be saved after click save button.</h6>
+        <br/>
+        <div class="form-group row">
+          <div class="col-sm-3"></div>
+          <label for="inputFirstname" class="col-sm-3 col-form-label">First Name: </label>
+          <div class="col-sm-3">
+            <input type="text" name="firstName" id="inputFirstname" [(ngModel)]="patient.name" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3"></div>
+          <label for="inputLastname" class="col-sm-3 col-form-label">Last Name: </label>
+          <div class="col-sm-3">
+            <input type="text" name="lastName" id="inputLastname" [(ngModel)]="patient.surname" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3"></div>
+          <label for="inputEmail" class="col-sm-3 col-form-label">Email: </label>
+          <div class="col-sm-3">
+            <input type="email" name="email" id="inputEmail" [(ngModel)]="patient.email" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3"></div>
+          <label for="inputPassword" class="col-sm-3 col-form-label">Password: </label>
+          <div class="col-sm-3">
+            <input type="password" name="password" id="inputPassword"  [ngClass]="{ 'is-invalid': passwordLength}" ngModel>
+            <span class="text-danger" *ngIf="passwordLength">Password must be at least 5 characters</span>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3"></div>
+          <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm password: </label>
+          <div class="col-sm-3">
+            <input type="password" name="confirmPassword" id="confirmPassword" ngModel>
+            <div  style="color: red" *ngIf="flag">{{error}}</div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="col-ms-6">
+          <button type="submit" class="btn btn-success cursorPointer d-block mx-auto px-5">Save</button>
+          <div class="clear"></div>
+        </div>
+      </form>
+  </div>
+  </div>
+  
+  
+  

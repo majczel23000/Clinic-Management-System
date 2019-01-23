@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { UsersService } from '../../shared/services/users.service';
 
 @Component({
   selector: 'app-doctor-add',
@@ -13,7 +14,7 @@ export class DoctorAddComponent implements OnInit {
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router, private usersService: UsersService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -33,6 +34,9 @@ export class DoctorAddComponent implements OnInit {
       email: new FormControl('',[
         Validators.email,
         Validators.required
+      ]),
+      pesel: new FormControl('',[
+        Validators.required
       ])
     });
   }
@@ -51,12 +55,21 @@ export class DoctorAddComponent implements OnInit {
     const userData = {
       username: this.registerForm.value.username,
       password: this.registerForm.value.password,
-      firstName: this.registerForm.value.firstName,
-      lastName: this.registerForm.value.lastName,
-      email: this.registerForm.value.email
+      name: this.registerForm.value.firstName,
+      surname: this.registerForm.value.lastName,
+      email: this.registerForm.value.email,
+      pesel: this.registerForm.value.pesel,
+      type: 'doctor'
     }
-
     console.log(userData);
+    this.usersService.addDoctor(userData).subscribe(
+      res => {
+        this.router.navigate(['/dashboard/doctors'])
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
 }

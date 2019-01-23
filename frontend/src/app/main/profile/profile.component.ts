@@ -10,18 +10,47 @@ export class ProfileComponent implements OnInit {
 
   visibility = true;
 
-  user = {
-    id: '123456789',
-    firstName: 'Michal',
-    lastName: 'Razny',
-    email: 'michal@razny.pl',
-    pesel: '12345678912'
+  dataToEdit = {
+    name: '',
+    surname: '',
+    email: '',
+    pesel: '',
+    id: ''
   }
+
+  user: any;
 
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
-    // metoda na starcie do pobierania naszych danych od Karola, albo od razu je będzie zwracać
+    // get logged username
+    this.usersService.getUsers().subscribe(
+      res => {
+        for (let i = 0; i < res.length; i++){
+          if (localStorage.getItem('username') === res[i].username){
+            localStorage.setItem('user', JSON.stringify(res[i]));
+            this.user = res[i];
+          }
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    )
+    // get logged username
+    this.usersService.getDoctors().subscribe(
+      res => {
+        for (let i = 0; i < res.length; i++){
+          if (localStorage.getItem('username') === res[i].username){
+            localStorage.setItem('user', JSON.stringify(res[i]));
+            this.user = res[i];
+          }
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   showEditForm(){
@@ -29,17 +58,24 @@ export class ProfileComponent implements OnInit {
   }
 
   saveNewData(){
-    this.usersService.editUserDetails(this.user).subscribe(
-      res => {
-        console.log(res);
-        this.visibility = true;
-        this.getUserDetails();
-      },
-      err => {
-        console.log(err);
-        this.visibility = true;
-      }
-    )
+    // if(this.dataToEdit.name == '' || this.dataToEdit.surname == '' || this.dataToEdit.email == '' || this.dataToEdit.pesel == ''){
+    //   alert("Proszę wypełnić wszystkie pola");
+    // } else {
+      this.dataToEdit.id = this.user.id;
+      console.log(this.user);
+      this.usersService.editUserDetails(this.user).subscribe(
+        res => {
+          console.log(res);
+          this.visibility = true;
+          this.getUserDetails();
+        },
+        err => {
+          console.log(err);
+          this.visibility = true;
+        }
+      )
+    //}
+    
   }
 
   getUserDetails(){

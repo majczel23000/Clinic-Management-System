@@ -9,22 +9,58 @@ export class UsersService {
   constructor( private http: HttpClient) { }
 
   editUserDetails(userData){
-    return this.http.post<any>('users/'+userData.id, userData)
+    return this.http.post<any>('patient', userData)
+  }
+
+  editDoctorDetails(userData){
+    return this.http.post<any>('doctor', userData)
+  }
+
+  getDoctorDetails(id){
+    return this.http.get<any>('doctor/'+id);
+  }
+  
+  getPatientDetails(id){
+    return this.http.get<any>('patient/'+id);
   }
 
   getUserDetails(id){
-    return this.http.get<any>('users/'+id);
+    return this.http.get<any>('patient/'+id);
   }
 
   addDoctor(doctorData){
-    return this.http.post<any>('users', {doctorData});
+    return this.http.post<any>('register', doctorData);
+  }
+
+  activateDoctor(id){
+    return this.http.get<any>('register/'+id+'/activate');
   }
 
   getAllMeds(){
-    return this.http.get<any>('meds');
+    return this.http.get<any>('medication');
   }
 
   addMed(medData){
-    return this.http.post<any>('meds', medData);
+    return this.http.post<any>('medication', medData);
+  }
+
+  getUsers(){
+    return this.http.get<any>('patient');
+  }
+
+  getDoctors(){
+    return this.http.get<any>('doctor');
+  }
+
+  getPatients(){
+    return this.http.get<any>('patient');  
+  }
+
+  addVisit(data){
+    return this.http.post<any>('appointment', data);
+  }
+
+  getVisit(){
+    return this.http.get<any>('appointment');
   }
 }

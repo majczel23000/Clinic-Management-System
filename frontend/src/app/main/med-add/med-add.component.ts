@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsersService } from '../../shared/services/users.service';
 
 @Component({
   selector: 'app-med-add',
@@ -11,7 +12,8 @@ export class MedAddComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   constructor(private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+  private usersService: UsersService) { }
 
     ngOnInit() {
       this.registerForm = new FormGroup({
@@ -41,7 +43,15 @@ export class MedAddComponent implements OnInit {
         description: this.registerForm.value.description
       }
   
-      console.log(medData);
+      this.usersService.addMed(medData).subscribe(
+        res => {
+          alert('Lek został dodany');
+          this.router.navigate(['/dashboard/meds']);
+        },
+        err => {
+          console.log(err);
+        }
+      )
     }
 
 }

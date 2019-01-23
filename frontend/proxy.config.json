@@ -5,6 +5,13 @@
     "logLevel": "debug",
     "changeOrigin": true,
     "pathRewrite": {"^/oauth" : "/oauth"}
+  },
+  "/": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {"^/" : "/"}
   }
 
 }

@@ -5,7 +5,6 @@
       <div class="col-md-8"><h3 class="mt-4 text-center">| List of all doctors:</h3></div>
     </div>
     
-    
     <table class="table mt-5 table-hover text-center " id="doctorsTable">
       <thead class="thead-dark">
         <tr>
@@ -18,8 +17,8 @@
       <tbody>
         <tr *ngFor="let doctor of doctors; let i = index ">
           <th scope="row">{{i + 1}}</th>
-          <td>{{doctor?.firstName}}</td>
-          <td >{{doctor?.lastName}}</td>
+          <td>{{doctor?.name}}</td>
+          <td >{{doctor?.surname}}</td>
           <td class="text-center" >
             <button class="btn btn-edit btn-sm btn-edit-bg" (click)="detailsUser(i)"><i class="fa fa-user-circle" aria-hidden="true"></i></button>
           </td>
