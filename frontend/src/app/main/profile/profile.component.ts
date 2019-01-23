@@ -53,4 +53,22 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  onKey(event: any) { // without type info
+    if(event.target.value==""){
+      event.target.style.backgroundColor="#ffcccc";
+    }
+    else{
+      event.target.style.backgroundColor="#b3ffb3";
+    }
+  }
+  setDefault(event){
+    if(event.target.value==""){
+      event.target.style.backgroundColor="#ffcccc";
+    }
+    else{
+      event.target.style.backgroundColor="white";
+      event.target.style.border="1px solid black";
+    }
+  }
+
 }

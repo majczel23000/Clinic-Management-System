@@ -55,7 +55,7 @@
               First Name:
             </div>
             <div class="col-md-6">
-              <input type="text" [(ngModel)]="user.firstName" ngModel>
+              <input type="text" [(ngModel)]="user.firstName" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
             </div>
           </div>
         </li>
@@ -65,7 +65,7 @@
               Last Name:
             </div>
             <div class="col-md-6">
-              <input type="text" [(ngModel)]="user.lastName" ngModel>
+              <input type="text" [(ngModel)]="user.lastName" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
             </div>
           </div>
         </li>
@@ -75,7 +75,7 @@
               Email:
             </div>
             <div class="col-md-6">
-              <input type="text" [(ngModel)]="user.email" ngModel>
+              <input type="text" [(ngModel)]="user.email" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
             </div>
           </div>
         </li>
@@ -85,7 +85,7 @@
               PESEL:
             </div>
             <div class="col-md-6">
-              <input type="text" [(ngModel)]="user.pesel" ngModel>
+              <input type="text" [(ngModel)]="user.pesel" ngModel (keyup)="onKey($event)" (blur)="setDefault($event)">
             </div>
           </div>
         </li>

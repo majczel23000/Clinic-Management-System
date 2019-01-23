@@ -14,8 +14,11 @@ label{
   letter-spacing: 1px;
 }
 input{
+  width:100%;
   text-align: center;
+  padding: 3px 0px;
 }
 input:focus{
   background-color: #b3ffb3;
+  border-radius: 5px;
 }
