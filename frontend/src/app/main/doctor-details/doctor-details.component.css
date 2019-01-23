@@ -1,12 +1,21 @@
 .btn-cursor:hover{
-    cursor: pointer !important;
-  }
-  .clear{
-    clear: both;
-  }
-  .display-none{
-    display: none;
-  }
-  .is-invalid{
-    border: 2px solid #ff6780 !important;
-  }
+  cursor: pointer !important;
+}
+.clear{
+  clear: both;
+}
+.display-none{
+  display: none;
+}
+.is-invalid{
+  border: 2px solid #ff6780 !important;
+}
+label{
+  letter-spacing: 1px;
+}
+input{
+  text-align: center;
+}
+input:focus{
+  background-color: #b3ffb3;
+}

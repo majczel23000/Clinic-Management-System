@@ -1,0 +1,10 @@
+input{
+    width:100%;
+    text-align: center;
+    padding: 3px 0px;
+}
+input:focus{
+    background-color: #b3ffb3;
+    border:none;
+    border-radius: 5px;
+}
